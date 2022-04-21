@@ -5,6 +5,10 @@ inputs:
     description: My input
     required: false
     default: 'foobar'
+outputs:
+  my_output:
+    description: Just an output
+    value: ${{ steps.get_output.outputs.result }}
 
 runs:
   using: 'composite'
@@ -27,3 +31,9 @@ runs:
       with:
         script: |
           console.log('ACTION_MY_INPUT =', process.env.ACTION_MY_INPUT)
+    - name: Set Output
+      id: get_output
+      uses: actions/github-script@v6
+      with:
+        script: |
+          return 'some output'
