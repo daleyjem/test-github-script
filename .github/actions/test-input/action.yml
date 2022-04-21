@@ -13,7 +13,7 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          console.log(core.getInput('my_input'))
+          console.log('my_input =', core.getInput('my_input'))
     - name: Log it the other way
       run: |
         echo ${{ inputs.my_input }}
