@@ -7,7 +7,7 @@ inputs:
     default: 'foobar'
 
 runs:
-  using: 'node16'
+  using: 'composite'
   steps:
     - name: Log input val
       uses: actions/github-script@v6
