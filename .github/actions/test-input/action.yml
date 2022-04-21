@@ -18,3 +18,16 @@ runs:
       run: |
         echo ${{ inputs.my_input }}
       shell: bash
+    - name: Show env
+      run: |
+        env
+      shell: bash
+    - name: Try it by using process.env
+      run: |
+        export ACTION_MY_INPUT = "${{ inputs.my_input }}"
+      shell: bash
+    - name: Log ACTION_MY_INPUT
+      uses: actions/github-script@v6
+      with:
+        script: |
+          console.log('ACTION_MY_INPUT =', process.env.ACTION_MY_INPUT)
