@@ -20,7 +20,7 @@ runs:
       shell: bash
     - name: Try it by using process.env
       run: |
-        echo "::set-env name=ACTION_MY_INPUT::${{ inputs.my_input }}"
+        echo "ACTION_MY_INPUT=${{ inputs.my_input }}" >> $GITHUB_ENV
       shell: bash
     - name: Log ACTION_MY_INPUT
       uses: actions/github-script@v6
