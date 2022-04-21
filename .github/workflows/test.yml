@@ -1,0 +1,18 @@
+name: Test
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test input
+        id: my_test
+        uses: ./.github/actions/test-input
+      - name: Log Test Output
+        run: |
+          echo "My Output: ${{ steps.my_test.outputs.my_output }}"
