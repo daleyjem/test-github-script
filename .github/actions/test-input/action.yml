@@ -1,0 +1,39 @@
+name: Test Input
+description: Test input
+inputs:
+  my_input: 
+    description: My input
+    required: false
+    default: 'foobar'
+outputs:
+  my_output:
+    description: Just an output
+    value: ${{ steps.get_output.outputs.result }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Log input val
+      uses: actions/github-script@v6
+      with:
+        script: |
+          console.log('my_input =', core.getInput('my_input'))
+    - name: Log it the other way
+      run: |
+        echo ${{ inputs.my_input }}
+      shell: bash
+    - name: Try it by using process.env
+      run: |
+        echo "ACTION_MY_INPUT=${{ inputs.my_input }}" >> $GITHUB_ENV
+      shell: bash
+    - name: Log ACTION_MY_INPUT
+      uses: actions/github-script@v6
+      with:
+        script: |
+          console.log('ACTION_MY_INPUT =', process.env.ACTION_MY_INPUT)
+    - name: Set Output
+      id: get_output
+      uses: actions/github-script@v6
+      with:
+        script: |
+          return 'some output'
